@@ -6,13 +6,17 @@
 package softwarefinal;
 
 /**
- *
- * @author burge
+ * Car class for create every car.
+ * @author burgess
  */
 public abstract class Car {
     
-    private String carLogo;
+    private String carLogo;//car logo for the car
 
+    /**
+     * 
+     * @param cl 
+     */
     public Car(CarLogo cl) {
         setCarLogo(cl);
     }
