@@ -5,13 +5,13 @@
  */
 package errorCheck;
 
-/**
- * This is the error check methods
- * @author burge
- */
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This is the error check methods
+ * @author Burgess
+ */
 public class JavaErrorCheck {
     
     /**
@@ -168,7 +168,7 @@ public class JavaErrorCheck {
     
     /**
      * ***********
-     * check String for no ""
+     * check String for the correct format for ID
      * @param sc
      * @return String
      */

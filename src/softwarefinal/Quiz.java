@@ -12,24 +12,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import errorCheck.JavaErrorCheck;
+
 /**
- *
- * @author burgess
+ * The quiz class is the main class to start the quiz
+ * @author Burgess
  */
 public class Quiz {
 
     /**
+     * Main method to call the whole method, first is the greeting method,
+     * second is the mkUser method and startQ method to begin the whole mission
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
         greeting();
         mkUser();
         startQ();
-
-
     }
     
+    /**
+     * greeting static method is to introduce the quiz for the user
+     */
     public static void greeting(){
 
         String s = "";
@@ -40,6 +43,9 @@ public class Quiz {
             +"---------------------------------------------------");
     }
     
+    /**
+     * mkUser method is to create a new user for the quiz
+     */
     public static void mkUser(){
         
         Scanner input = new Scanner(System.in);
@@ -59,23 +65,29 @@ public class Quiz {
         
     }
     
+    /**
+     * startQ method will start the quiz, it contains the mkQuestions and 
+     * mkAnswers method and do the quiz
+     */
     public static void startQ(){
         
-        Random ran = new Random();
+        Random ran = new Random();// randomly pick the first three question
         Scanner input = new Scanner(System.in);
-        JavaErrorCheck jec = new JavaErrorCheck();
+        JavaErrorCheck jec = new JavaErrorCheck();//error check for the user
         
-        ArrayList<Questions> Qarr = mkQuestions();
-        ArrayList<Answers> Aarr = mkAnswers();
+        ArrayList<Questions> Qarr = mkQuestions();//make all the question
+        ArrayList<Answers> Aarr = mkAnswers();//make all the answer
 
         System.out.println("Here is your first question and the options > ");
         int count = ran.nextInt(2);
         
         int choice;
         int SedanNum=0, VanNum=0, SportNum=0, SUVNum=0;
-        int FordNum=0, BMWNum=0, ToyataNum=0, PorscheNum=0;
+        int FordNum=0, BMWNum=0, ToyotaNum=0, PorscheNum=0;
+        //The int will calculate all the score and use the method to generate 
+        //the best car
         
-        switch (count){
+        switch (count){//the first question is picked from the question 1, 2
             case 0:
                 System.out.println(Qarr.get(0).getQuestion());
                 System.out.println(Aarr.get(0).toString());
@@ -113,7 +125,7 @@ public class Quiz {
         
         System.out.println("Here is your next question and the options > ");
         count = ran.nextInt(2);
-        switch (count){
+        switch (count){//the second question is picked from the question 3, 4
             case 0:
                 System.out.println(Qarr.get(2).getQuestion());
                 System.out.println(Aarr.get(2).toString());
@@ -127,7 +139,7 @@ public class Quiz {
                    BMWNum++;
                    FordNum++;
                 }
-                else ToyataNum++; 
+                else ToyotaNum++; 
                 break;
                 
             case 1:
@@ -137,7 +149,7 @@ public class Quiz {
                 choice = jec.checkIntOneTwoThree(input);
                 
                 if(choice==1){
-                   ToyataNum++; 
+                   ToyotaNum++; 
                 }
                 else if(choice==2){
                    BMWNum++;
@@ -149,7 +161,7 @@ public class Quiz {
         
         System.out.println("Here is your next question and the options > ");
         count = ran.nextInt(2);
-        switch (count){
+        switch (count){//the third question is picked from the question 5, 6
             case 0:
                 System.out.println(Qarr.get(4).getQuestion());
                 System.out.println(Aarr.get(4).toString());
@@ -186,6 +198,7 @@ public class Quiz {
         }
         
         System.out.println("Here is your next questions and the options > ");
+        //the fourth question
         System.out.println(Qarr.get(6).getQuestion());
         System.out.println(Aarr.get(6).toString());       
         System.out.println("Please enter your answer:");
@@ -201,6 +214,7 @@ public class Quiz {
         }
         
         System.out.println("Here is your next questions and the options > ");
+        //the fifth question
         System.out.println(Qarr.get(7).getQuestion());
         System.out.println(Aarr.get(7).toString());
         System.out.println("Please enter your answer:");
@@ -216,6 +230,7 @@ public class Quiz {
         }
         
         System.out.println("Here is your final questions and the options > ");
+        //the sixth question
         System.out.println(Qarr.get(8).getQuestion());
         System.out.println(Aarr.get(8).toString());
         System.out.println("Please enter your answer:");
@@ -223,22 +238,28 @@ public class Quiz {
                 
         if(choice==1){
             PorscheNum+=3;
-            ToyataNum++;
+            ToyotaNum++;
             FordNum++;
             BMWNum++;
         }
         else{
             PorscheNum++;
-            ToyataNum+=3;
+            ToyotaNum+=3;
             FordNum+=2;
             BMWNum+=2;
         }
         
+        //favoriteCar method generate all the option's score and find the best
+        //car
         favoriteCar(SedanNum, VanNum, SportNum, SUVNum, FordNum, BMWNum, 
-                ToyataNum, PorscheNum);
+                ToyotaNum, PorscheNum);
 
     }
     
+    /**
+     * mkQuestions will make all the question the quiz need
+     * @return ArrayList<Questions> which store all the questions
+     */
     public static ArrayList<Questions> mkQuestions(){
         
         ArrayList<Questions> Qarr = new ArrayList();
@@ -263,6 +284,10 @@ public class Quiz {
         
     }
     
+    /**
+     * mkAnswers will make all the answers the quiz need
+     * @return ArrayList<Answers> which store all the answers
+     */
     public static ArrayList<Answers> mkAnswers(){
         ArrayList<Answers> Aarr = new ArrayList();
         Aarr.add(new Answers("1. Sedan","2. Van(family car)","3. Sports car"));
@@ -282,6 +307,11 @@ public class Quiz {
         return Aarr;
     }
     
+    /**
+     * mkCars method use the Results class and store all the cars in the
+     * array list
+     * @return Results objects for all the cars
+     */
     public static Results mkCars(){  
         
         Results allCars = new Results();
@@ -290,10 +320,23 @@ public class Quiz {
         return allCars;
     }
     
+    /**
+     * favoriteCar method help to calculate the score and generate the best car
+     * @param SedanNum, is the score for the type Sedan
+     * @param VanNum, is the score for the type Van
+     * @param SportNum, is the score for the type Sport
+     * @param SUVNum, is the score for the type SUV
+     * @param FordNum, is the score for the logo Ford
+     * @param BMWNum, is the score for the logo BMW
+     * @param ToyotaNum, is the score for the logo Toyota
+     * @param PorscheNum , is the score for the logo Porsche
+     */
     public static void favoriteCar(int SedanNum, int VanNum, int SportNum
-        , int SUVNum, int FordNum, int BMWNum, int ToyataNum, int PorscheNum){
+        , int SUVNum, int FordNum, int BMWNum, int ToyotaNum, int PorscheNum){
         
+        //HashMap array is to generate the key and value for the car and the score
         HashMap arr1 = new HashMap();
+        //calculate the type score first
         arr1.put("Sedan",SedanNum);
         arr1.put("Van",VanNum);
         arr1.put("Sport car",SportNum);
@@ -304,9 +347,10 @@ public class Quiz {
                 -> o2.getValue().compareTo(o1.getValue()));
         
         HashMap arr2 = new HashMap();
+        //calculate the type score for the second step
         arr1.put("Ford",FordNum);
         arr1.put("BMW",BMWNum);
-        arr1.put("Toyata",ToyataNum);
+        arr1.put("Toyota",ToyotaNum);
         arr1.put("Porsche",PorscheNum);
         
         List<Map.Entry<String, Integer>> list2 = new ArrayList<>(arr1.entrySet());
@@ -315,6 +359,7 @@ public class Quiz {
 
         
         mkCars();
+        //find the best car now after get the score
         int findFirstCar=0;
         for (int i = 0; i < mkCars().getCars().size(); i++) {
             if(mkCars().getCars().get(i).getCarLogo().equals(list2.get(0).getKey())
@@ -335,8 +380,6 @@ public class Quiz {
             +"---------------------------------------------------"
             +"---------------------------------------------------");
         System.out.println(s);
-        
-        
     }
                  
 }
